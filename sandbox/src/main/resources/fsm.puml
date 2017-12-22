@@ -1,0 +1,49 @@
+@startuml
+
+abstract class NamedElement {
+    +name: String
+}
+
+NamedElement <|-- App
+NamedElement <|-- State
+NamedElement <|-- Brick
+
+class App
+class State
+
+class Brick {
+    +pin: Integer
+}
+
+abstract class ValuedElement {
+    +value: Signal
+}
+
+class Action
+class Transition
+
+ValuedElement <|-- Action
+ValuedElement <|-- Transition
+
+class Sensor
+class Actuator
+
+Brick <|-- Sensor
+Brick <|-- Actuator
+
+enum SIGNAL {
+    HIGH
+    LOW
+}
+
+App --> "1\ninitial" State
+App *--> "1..*\nstates" State
+App *--> "1..*\nbricks" Brick
+
+State *--> "1..*\nactions" Action
+State *--> "1..*\ntransitions" Transition
+
+Transition --> "1\nsensor" Sensor
+Action --> "1\nactuator" Actuator
+
+@enduml

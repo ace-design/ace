@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>eu.ace-design</groupId>
+    <artifactId>ace</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>ACE :: Root Project</name>
+    <description>ACE means Abstract Composition Engine</description>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <developers>
+        <developer>
+            <id>mosser</id>
+            <name>Sebastien Mosser</name>
+            <email>mosser@i3s.unice,fr</email>
+            <url>http://www.i3s.unice.fr/~mosser</url>
+            <organization>Université Côte d'Azur, CNRS , I3S, France (UMR CNRS 7271)</organization>
+            <organizationUrl>http://www.i3s.unice.fr</organizationUrl>
+            <timezone>+2</timezone>
+            <roles>
+                <role>Architect</role>
+                <role>Main Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Université Côte d'Azur, CNRS , I3S, France</name>
+        <url>http://www.i3s.unice.fr</url>
+    </organization>
+
+    <modules>
+        <module>engine</module>
+    </modules>
+
+    <properties>
+        <!-- Development environment -->
+        <versions.scala>2.11</versions.scala>
+        <versions.scala.minor>${versions.scala}.11</versions.scala.minor>
+        <versions.log4j>2.10.0</versions.log4j>
+        <versions.log4j.scala>11.0</versions.log4j.scala>
+        <!-- Test environment -->
+        <versions.junit>4.12</versions.junit>
+        <versions.specs2>4.0.1</versions.specs2>
+        <!-- Build environment -->
+        <versions.surefire>2.20.1</versions.surefire>
+        <versions.gpg>1.6</versions.gpg>
+        <versions.maven.scala>3.3.1</versions.maven.scala>
+    </properties>
+
+    <dependencies>
+        <!-- Global project dependencies: Scala & Log4J, JUnit & Specs 2-->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${versions.scala.minor}</version>
+        </dependency>
+
+       <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${versions.log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${versions.log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api-scala_${versions.scala}</artifactId>
+            <version>${versions.log4j.scala}</version>
+        </dependency>
+        <!-- Test project dependencies: Scala & Log4J, JUnit & Specs 2-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${versions.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-core_${versions.scala}</artifactId>
+            <version>${versions.specs2}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-junit_${versions.scala}</artifactId>
+            <version>${versions.specs2}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Scala Compilation -->
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>${versions.maven.scala}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-unchecked</arg>
+                        <arg>-deprecation</arg>
+                        <arg>-explaintypes</arg>
+                    </args>
+                    <recompileMode>incremental</recompileMode>
+                    <!-- run the 'zinc -start' command to start the compilation server -->
+                    <useZincServer>true</useZincServer>
+                </configuration>
+            </plugin>
+            <!-- Maven GPG signature plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${versions.gpg}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Unit test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${versions.surefire}</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
