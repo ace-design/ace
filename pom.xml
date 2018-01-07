@@ -122,7 +122,7 @@
                         <arg>-explaintypes</arg>
                     </args>
                     <recompileMode>incremental</recompileMode>
-                    <!-- run the 'zinc -start' command to start the compilation server -->
+                    <!-- run the 'mvn claean' command to start the compilation server -->
                     <useZincServer>true</useZincServer>
                 </configuration>
             </plugin>

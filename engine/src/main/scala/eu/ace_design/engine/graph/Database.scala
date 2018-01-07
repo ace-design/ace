@@ -16,24 +16,36 @@ trait Database extends Logging {
   private def registerShutdownHook(graphDb: GraphDatabaseService): Unit = {
     Runtime.getRuntime.addShutdownHook(new Thread() {
       override def run(): Unit = {
+        logger.info("Shutting down the Neo4J embedded database")
         graphDb.shutdown()
+        logger.info(s"Deleting [$databaseDirectory] contents")
         org.neo4j.io.fs.FileUtils.deleteRecursively(databaseDirectory)
       }
     })
   }
 
   // Initialising the graph engine
-  private val database: GraphDatabaseService = new GraphDatabaseFactory()
-    .newEmbeddedDatabaseBuilder(databaseDirectory)
-    .newGraphDatabase()
+  private val database: GraphDatabaseService = {
+    logger.info(s"Creating an embedded Neo4J database located at [$databaseDirectory]")
+    new GraphDatabaseFactory()
+      .newEmbeddedDatabaseBuilder(databaseDirectory)
+      .newGraphDatabase()
+  }
 
   registerShutdownHook(database)
 
   protected def cypher(query: Cypherable): Result = {
     val q = query.translate
     logger.info(s"    $q")
-    try { database.execute(q) }
-    catch{ case e: Exception => logger.error(e); throw e }
+    try {
+      val result = database.execute(q)
+      assert(query.postCondition(result), s"Action post-condition violated: [${query.getClass.getSimpleName}]")
+      result
+    }
+    catch{
+      case e: Exception => logger.error(e); throw e
+      case e: Error => logger.error(e); throw new RuntimeException(e)
+    }
   }
 
   // Execute code within a transaction inside the engine
@@ -46,8 +58,10 @@ trait Database extends Logging {
       result
     }
     finally {
-      if (tx != null) tx.close()
-      logger.info(s"Closing Transaction [${tx.hashCode()}]")
+      if (tx != null) {
+        tx.close()
+        logger.info(s"Closing Transaction [${tx.hashCode()}]")
+      }
     }
   }
 

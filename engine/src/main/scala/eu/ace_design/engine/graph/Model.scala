@@ -1,8 +1,12 @@
 package eu.ace_design.engine.graph
 
+import java.util.UUID
+
 import scala.collection.mutable
 
-class Node() {
+case class VertexIdentifier(uuid: UUID, label: String)
+
+class Vertex() {
 
   private val properties: mutable.Map[String, AnyRef] = new mutable.HashMap[String, AnyRef]()
 
@@ -14,4 +18,6 @@ class Node() {
 
 }
 
+class Edge() {
 
+}

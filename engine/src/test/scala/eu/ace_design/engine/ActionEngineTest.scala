@@ -17,38 +17,62 @@ class ActionEngineTest extends SpecificationWithJUnit {
 
   private val context = new { } with Context { }
 
+
   "The Graph Action Engine" should {
 
     "support the execution of the empty sequence" in {
       context.execute() must not(throwAn[Exception])
     }
 
-    "create a node when asked to" in {
-      val uuid = UUID.randomUUID()
-      context.execute(CreateVertex(uuid, "aLabel")) must not(throwAn[Exception])
-      val result = context.query(FindVertexByUUID(uuid, "aLabel"))
-      result must not(beNull)
-    }
-
     "support label declaration" in {
-      context.administrate(DeclareLabel("aLabel")) must not(throwAn[Exception])
+      context.administrate(DeclareLabel("aSpecificLabel")) must not(throwAn[Exception])
     }
 
     "reject UUID violations" in {
       context.administrate(DeclareLabel("aLabel"))
       val uuid = UUID.randomUUID()
-      context.execute(CreateVertex(uuid, "aLabel"), CreateVertex(uuid, "aLabel")) must throwAn[Exception]
+      context.execute(uuid :- "aLabel", uuid :- "aLabel") must throwAn[Exception]
+    }
+
+    "create a node when asked to" in {
+      val uuid = UUID.randomUUID()
+      context.execute(uuid :- "aLabel") must not(throwAn[Exception])
+      val result = context.query(FindVertexByUUID(uuid :- "aLabel"))
+      result must not(beNull)
     }
 
     "support property update for a given vertex" in {
       val uuid = UUID.randomUUID()
       context.execute(
-        CreateVertex(uuid, "aLabel"),
-        SetVertexProperty(uuid, "aLabel", "aProperty", "aValue")
+        uuid :- "aLabel",
+        uuid :- "aLabel" | "aProperty" := "aValue"
       ) must not(throwAn[Exception])
-      val result = context.query(FindVertexByUUID(uuid, "aLabel"))
+      val result = context.query(FindVertexByUUID(uuid :- "aLabel"))
       result must not(beNull)
       result("aProperty") must_== "aValue"
+    }
+
+    "throw an exception when asked to create an edge between to non-existing vertices" in {
+      val source  = UUID.randomUUID()
+      val target = UUID.randomUUID()
+      context.execute(
+        (source :- "aLabel") -- "aRelation" --> (target :- "aLabel")
+      ) must throwAn[Exception]
+
+    }
+
+    "support the definition of edges between vertices" in {
+      val source = UUID.randomUUID()
+      val target = UUID.randomUUID()
+
+      context.execute(
+        source :- "aLabel",
+        target :- "aLabel",
+        (source :- "aLabel") -- "aRelation" --> (target :- "aLabel")
+      )
+
+      true must beTrue
+
     }
 
   }
