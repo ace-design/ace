@@ -20,7 +20,7 @@ trait History {
 
   private class Event(val a: Translatable, val data: Map[EventType, Int])
 
-  private val history: mutable.Buffer[Event] = new mutable.ListBuffer[Event]()
+  private val _history: mutable.Buffer[Event] = new mutable.ListBuffer[Event]()
 
   protected def register(a: Translatable, stats: QueryStatistics): Unit = {
     val recorded = Map(
@@ -36,12 +36,18 @@ trait History {
       RelationshipsCreated -> stats.getRelationshipsCreated,
       RelationshipsDeleted -> stats.getRelationshipsDeleted
     )
-    history += new Event(a, recorded)
+    _history += new Event(a, recorded)
   }
 
-  def extract(eventType: EventType): Int =
-    (0 /: history.map( e => e.data.getOrElse(eventType, 0) )) { _ + _ }
+  def howMany(eventType: EventType): Int =
+    (0 /: _history.map( e => e.data.getOrElse(eventType, 0) )) { _ + _ }
 
-  def length: Int = history.size
+  def history: Map[EventType, Int] = {
+    (Map[EventType, Int]() /: _history) { (acc, elem) =>
+      acc ++ elem.data.map { case (k,v) => k -> (acc.getOrElse(k,0) + v)}
+    }
+  }
+
+  def length: Int = _history.size
 
 }
