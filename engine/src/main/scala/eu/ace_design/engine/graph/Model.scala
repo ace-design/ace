@@ -12,12 +12,7 @@ class Vertex() {
 
   def apply(key: String) = properties(key)
 
-  def update(key: String, value: AnyRef): Unit = {
-    properties(key) = value
-  }
+  def update(key: String, value: AnyRef): Unit = { properties(key) = value }
 
 }
 
-class Edge() {
-
-}
