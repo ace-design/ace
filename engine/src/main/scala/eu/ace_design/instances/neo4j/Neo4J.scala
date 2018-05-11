@@ -2,8 +2,8 @@ package eu.ace_design.instances.neo4j
 
 import java.io.File
 
-import eu.ace_design.kernel.engines.query.{Query, QueryEngine}
-import eu.ace_design.kernel.engines.storage.{HistoryEvent, StorageAction, StorageActionEngine}
+import eu.ace_design.kernel.modules.query.{Query, QueryEngine}
+import eu.ace_design.kernel.modules.storage.{HistoryEvent, StorageAction, StorageActionEngine}
 import eu.ace_design.kernel.graph.{GraphStorage, Node, Transactional}
 import org.neo4j.graphdb._
 import org.neo4j.graphdb.factory.GraphDatabaseFactory

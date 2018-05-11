@@ -2,7 +2,7 @@ package eu.ace_design.instances.neo4j
 
 import java.util.UUID
 
-import eu.ace_design.kernel.engines.query.{Query, QueryFactory}
+import eu.ace_design.kernel.modules.query.{Query, QueryFactory}
 import Neo4JHelpers._
 
 object CypherQueryFactory extends QueryFactory[Cypher] {

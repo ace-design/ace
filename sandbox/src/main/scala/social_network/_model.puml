@@ -1,0 +1,34 @@
+@startuml
+
+class Person {
+    + name: String
+    {abstract} U(Person): Person
+    {abstract} (Person): Boolean
+}
+
+Person "1" --> "*" Person: friends
+
+class Organization {
+    +name
+    {abstract} U(Organization): Organization
+}
+
+Organization "1" *--> "*" Person: persons
+
+class Composer {
+    merge(Organization, Organization): Organization
+    merge(Person, Person): Person
+}
+
+class SocialNetworkFactory {
+    createPerson(): Person
+    createOrganization(): Organization
+}
+
+Composer <.. Person
+Composer <.. Organization
+
+SocialNetworkFactory ..> Person
+SocialNetworkFactory ..> Organization
+
+@enduml

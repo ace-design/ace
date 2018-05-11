@@ -1,7 +1,7 @@
 package eu.ace_design.kernel.graph
 
-import eu.ace_design.kernel.engines.query.Query
-import eu.ace_design.kernel.engines.storage.{HistoryEvent, StorageAction, StorageActionResult}
+import eu.ace_design.kernel.modules.query.Query
+import eu.ace_design.kernel.modules.storage.{HistoryEvent, StorageAction, StorageActionResult}
 import org.apache.logging.log4j.scala.Logging
 
 /**

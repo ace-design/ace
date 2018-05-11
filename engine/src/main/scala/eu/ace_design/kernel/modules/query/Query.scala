@@ -1,4 +1,4 @@
-package eu.ace_design.kernel.engines.query
+package eu.ace_design.kernel.modules.query
 
 trait Query[TargetLanguage] {
 

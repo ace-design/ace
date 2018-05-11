@@ -2,7 +2,7 @@ package eu.ace_design.kernel
 
 import java.util.UUID
 
-import eu.ace_design.kernel.engines.storage.HistoryEvent
+import eu.ace_design.kernel.modules.storage.HistoryEvent
 import org.specs2.mutable.SpecificationWithJUnit
 
 import scala.util.Random

@@ -1,4 +1,4 @@
-package eu.ace_design.kernel.engines.storage
+package eu.ace_design.kernel.modules.storage
 
 trait StorageAction[TargetLanguage] {
 

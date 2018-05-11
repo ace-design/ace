@@ -2,7 +2,7 @@ package eu.ace_design.instances.neo4j
 
 import java.util.UUID
 
-import eu.ace_design.kernel.engines.storage.{HistoryEvent, StorageAction, StorageActionFactory}
+import eu.ace_design.kernel.modules.storage.{HistoryEvent, StorageAction, StorageActionFactory}
 
 import Neo4JHelpers._
 

@@ -3,7 +3,7 @@ package eu.ace_design.kernel
 import java.util.UUID
 
 import eu.ace_design.instances.neo4j.Cypher
-import eu.ace_design.kernel.engines.storage.StorageAction
+import eu.ace_design.kernel.modules.storage.StorageAction
 import eu.ace_design.kernel.graph.Node
 import org.specs2.mutable.SpecificationWithJUnit
 import org.specs2.specification.BeforeAfterAll

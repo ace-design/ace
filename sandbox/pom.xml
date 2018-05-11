@@ -16,25 +16,12 @@
     </parent>
 
     <repositories>
-        <repository>
-            <id>anormcypher</id>
-            <name>Anorm Cypher repository</name>
-            <url>http://repo.anormcypher.org/</url>
-        </repository>
+
     </repositories>
 
     <dependencies>
 
-        <!-- <dependency>
-            <groupId>org.neo4j.driver</groupId>
-            <artifactId>neo4j-java-driver</artifactId>
-            <version>1.4.4</version>
-        </dependency> -->
-        <dependency>
-            <groupId>org.anormcypher</groupId>
-            <artifactId>anormcypher_2.11</artifactId>
-            <version>0.10.0</version>
-        </dependency>
+
 
     </dependencies>
 

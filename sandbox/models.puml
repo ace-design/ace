@@ -1,0 +1,78 @@
+@startuml
+
+    abstract NamedElement {
+        + name: String
+    }
+
+    abstract class Law< L,R,O extend Model> {
+        + apply(left: L, right: R): O
+    }
+    NamedElement <|-- Law
+
+    class Internal< L=R=O ><<(S,violet)>> {
+    }
+    Law <|-- Internal
+
+    abstract class External< L≠R > {
+    }
+    Law <|-- External
+
+    class LeftExternal< O=R ><<(S,violet)>> {
+    }
+    External <|-- LeftExternal
+
+    class RightExternal< O=L ><<(S,violet)>> {
+    }
+    External <|-- RightExternal
+
+    abstract class Model
+    NamedElement <|-- Model
+
+
+    abstract class Property<M extends Model> {
+        + confidence: float
+    }
+    NamedElement <|-- Property
+
+    abstract class UnaryProperty {
+        + check(m: M): Boolean
+    }
+    Property <|-- UnaryProperty
+    class Idempotent
+    UnaryProperty <-- Idempotent
+
+    abstract class Remarkable
+    Remarkable --> "1 elem" Model
+    UnaryProperty <-- Remarkable
+    class Zero
+    Remarkable <-- Zero
+    class Identity
+    Remarkable <-- Identity
+
+
+
+    abstract class BinaryProperty<M' extends Model> {
+        + check
+    }
+    Property <|-- BinaryProperty
+
+    class Generator<M extends Model>
+    Dimension .. Generator
+
+    Law *--> Property
+
+    class Dimension< M extends Model>
+    Law .. Dimension
+
+    abstract class PreOrder <M extends Model> {
+        apply(left: M, right: M): Boolean
+    }
+    NamedElement <|-- PreOrder
+
+    class Equivalence
+    PreOrder <|-- Equivalence
+    class Order
+    PreOrder <|-- Order
+
+
+@enduml
