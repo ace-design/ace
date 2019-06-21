@@ -19,11 +19,11 @@
         <developer>
             <id>mosser</id>
             <name>Sebastien Mosser</name>
-            <email>mosser@i3s.unice,fr</email>
-            <url>http://www.i3s.unice.fr/~mosser</url>
-            <organization>Université Côte d'Azur, CNRS , I3S, France (UMR CNRS 7271)</organization>
-            <organizationUrl>http://www.i3s.unice.fr</organizationUrl>
-            <timezone>+2</timezone>
+            <email>mosser.sebastien@uqam.ca</email>
+            <url>https://mosser.github.io</url>
+            <organization>Université du Québec À Montréal, Département d'Informatique</organization>
+            <organizationUrl>http://info.uqam.ca</organizationUrl>
+            <timezone>-4</timezone>
             <roles>
                 <role>Architect</role>
                 <role>Main Developer</role>
@@ -32,8 +32,8 @@
     </developers>
 
     <organization>
-        <name>Université Côte d'Azur, CNRS , I3S, France</name>
-        <url>http://www.i3s.unice.fr</url>
+        <name>Université du Québec À Montréal, Département d'Informatique</name>
+        <url>http://info.uqam.ca</url>
     </organization>
 
     <modules>
@@ -43,16 +43,16 @@
     <properties>
         <!-- Development environment -->
         <versions.scala>2.11</versions.scala>
-        <versions.scala.minor>${versions.scala}.11</versions.scala.minor>
-        <versions.log4j>2.10.0</versions.log4j>
+        <versions.scala.minor>${versions.scala}.8</versions.scala.minor>
+        <versions.log4j>2.11.2</versions.log4j>
         <versions.log4j.scala>11.0</versions.log4j.scala>
         <!-- Test environment -->
         <versions.junit>4.12</versions.junit>
-        <versions.specs2>4.0.1</versions.specs2>
+        <versions.specs2>4.3.4</versions.specs2>
         <!-- Build environment -->
-        <versions.surefire>2.20.1</versions.surefire>
+        <versions.surefire>2.22.1</versions.surefire>
         <versions.gpg>1.6</versions.gpg>
-        <versions.maven.scala>3.3.1</versions.maven.scala>
+        <versions.maven.scala>4.0.2</versions.maven.scala>
     </properties>
 
     <dependencies>
@@ -122,8 +122,8 @@
                         <arg>-explaintypes</arg>
                     </args>
                     <recompileMode>incremental</recompileMode>
-                    <!-- run the 'mvn claean' command to start the compilation server -->
-                    <useZincServer>true</useZincServer>
+                    <!-- run the 'mvn clean' command to start the compilation server -->
+                    <!-- <useZincServer>true</useZincServer> -->
                 </configuration>
             </plugin>
             <!-- Maven GPG signature plugin -->
