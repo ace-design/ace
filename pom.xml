@@ -50,9 +50,9 @@
         <versions.junit>4.12</versions.junit>
         <versions.specs2>4.3.4</versions.specs2>
         <!-- Build environment -->
+        <versions.maven.scala>4.0.2</versions.maven.scala>
         <versions.surefire>2.22.1</versions.surefire>
         <versions.gpg>1.6</versions.gpg>
-        <versions.maven.scala>4.0.2</versions.maven.scala>
     </properties>
 
     <dependencies>
@@ -62,7 +62,16 @@
             <artifactId>scala-library</artifactId>
             <version>${versions.scala.minor}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${versions.scala.minor}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${versions.scala.minor}</version>
+        </dependency>
        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -121,7 +130,7 @@
                         <arg>-deprecation</arg>
                         <arg>-explaintypes</arg>
                     </args>
-                    <recompileMode>incremental</recompileMode>
+                    <!-- <recompileMode>incremental</recompileMode> -->
                     <!-- run the 'mvn clean' command to start the compilation server -->
                     <!-- <useZincServer>true</useZincServer> -->
                 </configuration>
