@@ -6,3 +6,6 @@ jdk:
 cache:
   directories:
     - $HOME/.m2
+
+after_success:
+  - rm -rf $HOME/.m2/repository/eu/ace-design
