@@ -12,7 +12,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory
 object Neo4J extends GraphStorage[Cypher] with Transactional[Transaction]
   with StorageActionEngine[Cypher] with QueryEngine[Cypher]{
 
-  private val databaseDirectory = new File(System.getProperty("java.io.tmpdir") + "neo4j")
+  private val databaseDirectory = new File(System.getProperty("java.io.tmpdir") + "/neo4j")
 
   private val db: GraphDatabaseService = {
     logger.info(s"Creating an embedded Neo4J database located at [$databaseDirectory]")
