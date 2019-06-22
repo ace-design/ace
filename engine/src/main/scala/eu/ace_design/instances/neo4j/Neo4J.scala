@@ -16,7 +16,11 @@ object Neo4J extends GraphStorage[Cypher] with Transactional[Transaction]
 
   private val db: GraphDatabaseService = {
     logger.info(s"Creating an embedded Neo4J database located at [$databaseDirectory]")
-    val result = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(databaseDirectory).newGraphDatabase()
+    val result = new GraphDatabaseFactory()
+      .newEmbeddedDatabaseBuilder(databaseDirectory)
+      .loadPropertiesFromURL(getClass.getResource("/neo4j.conf"))
+      .newGraphDatabase()
+
     Runtime.getRuntime.addShutdownHook(new Thread() {
       override def run(): Unit = {
         logger.info("Shutting down the Neo4J embedded database")
