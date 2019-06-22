@@ -129,8 +129,9 @@
                         <arg>-unchecked</arg>
                         <arg>-deprecation</arg>
                         <arg>-explaintypes</arg>
+                        <arg>-feature</arg>
                     </args>
-                    <!-- <recompileMode>incremental</recompileMode> -->
+                    <recompileMode>incremental</recompileMode>
                     <!-- run the 'mvn clean' command to start the compilation server -->
                     <!-- <useZincServer>true</useZincServer> -->
                 </configuration>
@@ -143,7 +144,7 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
