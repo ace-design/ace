@@ -5,4 +5,4 @@
 # Maven target directory
 **/target
 
-
+.DS_Store
