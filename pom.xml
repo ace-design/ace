@@ -47,7 +47,7 @@
         <versions.log4j>2.11.2</versions.log4j>
         <versions.log4j.scala>11.0</versions.log4j.scala>
         <!-- Test environment -->
-        <versions.junit>4.12</versions.junit>
+        <versions.junit>4.13.1</versions.junit>
         <versions.specs2>4.3.4</versions.specs2>
         <!-- Build environment -->
         <versions.maven.scala>4.0.2</versions.maven.scala>
