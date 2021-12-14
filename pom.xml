@@ -44,7 +44,7 @@
         <!-- Development environment -->
         <versions.scala>2.11</versions.scala>
         <versions.scala.minor>${versions.scala}.8</versions.scala.minor>
-        <versions.log4j>2.11.2</versions.log4j>
+        <versions.log4j>2.16.0</versions.log4j>
         <versions.log4j.scala>11.0</versions.log4j.scala>
         <!-- Test environment -->
         <versions.junit>4.12</versions.junit>
